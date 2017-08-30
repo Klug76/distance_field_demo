@@ -20,16 +20,16 @@ package
 
 		private function load_Assets(): void
 		{
-            var assets: AssetManager = new AssetManager();
-            assets.verbose = CONFIG::debug;
-            assets.enqueue(EmbeddedAssets);
+			var assets: AssetManager = new AssetManager();
+			assets.verbose = CONFIG::debug;
+			assets.enqueue(EmbeddedAssets);
 
 
-            assets.loadQueue(function(ratio: Number): void
-            {
-                if (1 == ratio)
-                    on_Load_Complete();
-            });
+			assets.loadQueue(function(ratio: Number): void
+			{
+				if (1 == ratio)
+					on_Load_Complete();
+			});
 
 		}
 
