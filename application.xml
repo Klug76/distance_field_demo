@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<application xmlns="http://ns.adobe.com/air/application/19.0">
+	
+	<id>distancefielddemo</id> 
+	<versionNumber>1.0</versionNumber> 
+	<filename>distancefielddemo</filename> 
+	
+	<name>distance_field_demo</name> 
+	<description></description> 
+	<copyright></copyright> 
+	
+	<initialWindow> 
+		<title>distance_field_demo</title> 
+		<content>distancefielddemo.swf</content> 
+		<systemChrome>standard</systemChrome> 
+		<transparent>false</transparent> 
+		<visible>true</visible> 
+		<minimizable>true</minimizable> 
+		<maximizable>true</maximizable> 
+		<resizable>true</resizable> 
+		<renderMode>direct</renderMode>
+		<depthAndStencil>true</depthAndStencil>
+	</initialWindow> 
+</application>
