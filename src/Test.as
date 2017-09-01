@@ -7,11 +7,12 @@ package
 	import starling.core.Starling;
 	import starling.events.Event;
 	import starling.styles.DistanceFieldStyle;
+	import starling.text.TextField;
+	import starling.text.TextFormat;
 	import starling.utils.AssetManager;
 
-	public class Test extends LayoutGroup implements IAnimatable
+	public class Test extends LayoutGroup
 	{
-		private var text1_: BitmapFontTextRenderer;
 
 		public function Test()
 		{
@@ -28,66 +29,71 @@ package
 			assets.loadQueue(function(ratio: Number): void
 			{
 				if (1 == ratio)
-					on_Load_Complete();
+					on_Load_Complete2();
 			});
 
 		}
 
 		private function on_Load_Complete(): void
 		{
-			var df: DistanceFieldStyle = new DistanceFieldStyle();
+			var df: DistanceFieldStyle;
+
+			df = new DistanceFieldStyle();
 			df.multiChannel = true;
 			df.setupOutline(0.5, 0x115588);
 
-			text1_ = new BitmapFontTextRenderer();
-			text1_.textFormat = new BitmapFontTextFormat("ubuntu_r", 96, 0xeeee00);
-			text1_.text = "Hello, World!";
-			text1_.move(400, 300);
-			text1_.style = df;
-			addChild(text1_);
-			text1_.visible = false;
+			var text1: TextField = new TextField(300, 100, "Hello,", new TextFormat("ubuntu_r", 64, 0xeeee00));
+			text1.x = 200;
+			text1.y = 100;
+			text1.style = df;
+			addChild(text1);
 
-			Starling.juggler.add(this);
-			addEventListener(Event.RESIZE, on_Resize);
+			df = new DistanceFieldStyle();
+			df.multiChannel = true;
+			//df.setupOutline(0.5, 0x115588);
+			df.setupDropShadow(0.5, 2, 2, 0xff0000);
+
+			var text2: TextField = new TextField(300, 100, "World!", new TextFormat("ubuntu_r", 96, 0xeeee00));
+			text2.x = 200;
+			text2.y = 300;
+			text2.style = df;
+			addChild(text2);
 		}
 
-		private function on_Resize(e: Event): void
+		private function on_Load_Complete2(): void
 		{
-			trace("size: ", width, height);
-			trace("stage.size: ", stage.stageWidth, stage.stageHeight);
-			//text1_.move(width * 0.5, height * 0.5);
-			text1_.move(stage.stageWidth * 0.5, stage.stageHeight * 0.5);
+			var df: DistanceFieldStyle;
+
+			df = new DistanceFieldStyle();
+			df.multiChannel = true;
+			df.setupOutline(0.5, 0x115588);
+
+			var bf: BitmapFontTextFormat;
+			bf = new BitmapFontTextFormat("ubuntu_r", 64, 0xeeee00);
+
+			var text1: BitmapFontTextRenderer = new BitmapFontTextRenderer();
+			text1.text = "Hello,";
+			text1.textFormat = bf;
+			text1.x = 200;
+			text1.y = 100;
+			text1.style = df;
+			addChild(text1);
+
+			df = new DistanceFieldStyle();
+			df.multiChannel = true;
+			//df.setupOutline(0.5, 0x115588);
+			df.setupDropShadow(0.5, 2, 2, 0xff0000);
+
+			bf = new BitmapFontTextFormat("ubuntu_r", 96, 0xeeee00);
+
+			var text2: BitmapFontTextRenderer = new BitmapFontTextRenderer();
+			text2.text = "World!";
+			text2.textFormat = bf;
+			text2.x = 200;
+			text2.y = 300;
+			text2.style = df;
+			addChild(text2);
 		}
 
-		private const delta: Number = 0.1;
-
-		private var msx: Number = 0;
-		private var msy: Number = 0;
-		private var msdx: Number = 0;
-		private var msdy: Number = 1;
-
-		public function advanceTime(time: Number): void
-		{
-			if (!text1_.visible)
-			{
-				if (text1_.width < 1)
-					return;
-				text1_.alignPivot();
-				text1_.visible = true;
-			}
-			msdx += msdy * 2;
-			if (msdx > 4)
-			{
-				msdy = -delta;
-				msdx = 4;
-			}
-			else if (msdx < -4)
-			{
-				msdy = delta;
-				msdx = -4;
-			}
-			msx += msdx;
-			text1_.rotation = msx / 360;
-		}
 	}
 }
